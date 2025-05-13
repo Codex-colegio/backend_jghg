@@ -16,7 +16,9 @@ use App\Modules\Usuarios\Controllers\UsuarioController;
 $app = new App();
 $router = $app->getRouter();
 
-
+// Propiedades
+$router->post('/api/usuarios/login', [UsuarioController::class, 'login3']);
+$router->get('/api/usuarios/{id}', [UsuarioController::class, 'mostrar']);
 $router->get('/api/usuarios', [UsuarioController::class, 'index']);
 
 
