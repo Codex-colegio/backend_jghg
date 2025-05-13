@@ -1,0 +1,8 @@
+ <IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Si el archivo o directorio existe, se sirve directamente
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # Redirige pasando la ruta en el parámetro "url"
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>

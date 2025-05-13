@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  swm_jghg:
+    build: .
+    container_name: swm_jghg
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - mysql_swm
+
+  # mysql:
+  #   image: mysql:8.0
+  #   container_name: mysql
+  #   restart: always
+  #   environment:
+  #     MYSQL_DATABASE: inmobiliaria
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  #     MYSQL_USER: root
+  #     MYSQL_PASSWORD: ""
+  #   ports:
+  #     - "3306:3306"
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
+  mysql_swm:
+    image: mysql:8.0
+    container_name: mysql_swm
+    restart: always
+    environment:
+      MYSQL_DATABASE: db_jghg
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+
+  phpmyadmin_swm:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin_swm
+    environment:
+      PMA_HOST: mysql_swm
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql_swm
+
+
+volumes:
+  mysql_data:
+
+
+
