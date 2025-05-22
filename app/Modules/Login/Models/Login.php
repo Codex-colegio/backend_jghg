@@ -1,21 +1,16 @@
 <?php
-namespace App\Modules\Permisos\Models;
+namespace App\Modules\Login\Models;
 
-class Permiso {
+class Login {
     private $db;
 
     public function __construct() {
         $this->db = require __DIR__ . '/../../../../config/database.php';
     }
 
-    public function todas() {
-        $stmt = $this->db->query("CALL sp_usuario_todas()");
-        return $stmt->fetchAll();
-    }
-
-    public function buscarPorId($id) {
-        $stmt = $this->db->prepare("CALL sp_permisos_por_usuario(:id)");
-        $stmt->execute(['id' => $id]);
+    public function buscarPorUsuario($usuario) {
+        $stmt = $this->db->prepare("CALL sp_login_por_usuario(:usuario)");
+        $stmt->execute(['usuario' => $usuario]);
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         if (!$result) return null;
@@ -37,5 +32,5 @@ class Permiso {
 
         return $usuarioData;
     }
-    
+
 }

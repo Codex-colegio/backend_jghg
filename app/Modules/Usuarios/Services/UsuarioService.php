@@ -13,10 +13,7 @@ class UsuarioService {
     public function obtenerTodas() {
         return $this->modelo->todas();
     }
-    public function obtenerPorId($estado) {
-        return $this->modelo->buscarPorId($estado);
-    }
-    public function obtenerPorUsuario($usuario) {
-        return $this->modelo->buscarPorUsuario($usuario);
+    public function obtenerPorId($id) {
+        return $this->modelo->buscarPorId($id);
     }
 }

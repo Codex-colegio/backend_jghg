@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
-
+require_once __DIR__ . '/../app/Middleware/CorsMiddleware.php';
+\App\Middleware\CorsMiddleware::handle();
 //esto captura errores fatales y los convierte en excepciones para que no de un mensaje de error desorganizado y dé uno legible y controlado
 set_error_handler(function($severity, $message, $file, $line) {
     if (error_reporting() & $severity) {
