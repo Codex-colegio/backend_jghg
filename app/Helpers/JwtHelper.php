@@ -23,7 +23,8 @@ class JwtHelper {
 
     public static function verificarToken($token) {
         try {
-            return JWT::decode($token, new Key(self::getClave(), 'HS256'));
+            return JWT::decode($token, new Key(self::getClave(), 'HS256')); //Decodifica y verifica el token
+            
         } catch (\Exception $e) {
             return null;
         }
