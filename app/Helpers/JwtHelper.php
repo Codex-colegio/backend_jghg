@@ -6,7 +6,7 @@ use \Firebase\JWT\Key;
 
 class JwtHelper {
     private static function getClave() {
-        return $_ENV['JWT_SECRET'] ?? 'clave_por_defecto';
+        return $_ENV['JWT_SECRET'];
     }
 
     public static function generarToken($data, $exp = 3600) {

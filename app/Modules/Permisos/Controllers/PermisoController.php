@@ -13,6 +13,16 @@ class PermisoController extends BaseAuthController {
         $this->service = new PermisoService();
     }
 
+
+    public function mostrar_todo(Request $request): void {
+        try {
+            $usuarios = $this->service->obtenerTodas();
+            $this->response->sendJson($usuarios);
+        } catch (\Exception $e) {
+            $this->response->sendError('Error al obtener los usuarios: ' . $e->getMessage(), 500);
+        }
+    }
+
     public function mostrar_permiso(Request $request): void {
         try {
             $id = $request->getParam('id');

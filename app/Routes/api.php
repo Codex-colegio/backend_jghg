@@ -12,6 +12,6 @@ $router = $app->getRouter();
 $router->post('/api/login', [LoginController::class, 'login']);
 $router->get('/api/usuarios/{id}', [UsuarioController::class, 'mostrar']);
 $router->get('/api/usuarios', [UsuarioController::class, 'index']);
-$router->get('/api/permisos', [PermisoController::class, 'mostrar_permiso']);
+$router->get('/api/permisos', [PermisoController::class, 'mostrar_todo']);
 
 

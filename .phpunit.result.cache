@@ -1,1 +1,1 @@
-{"version":1,"defects":{"LoginControllerTest::testLoginExitoso":4},"times":{"LoginControllerTest::testLoginExitoso":0.358,"LoginControllerTest::testLoginFallido":0.186}}
+{"version":1,"defects":{"LoginControllerTest::testLoginExitoso":3,"LoginControllerTest::testLoginFallido":3},"times":{"LoginControllerTest::testLoginExitoso":0.214,"LoginControllerTest::testLoginFallido":0.278}}
