@@ -13,13 +13,19 @@ class PermisoController extends BaseAuthController {
         $this->service = new PermisoService();
     }
 
-
     public function mostrar_todo(Request $request): void {
         try {
-            $usuarios = $this->service->obtenerTodas();
-            $this->response->sendJson($usuarios);
+            // Accede como objeto
+            $usuario = $this->payload->data;
+
+            $this->response->sendJson([
+                'idusuario' => $usuario->id,
+                'usuario' => $usuario->usuario,
+                'cargo' => $usuario->cargo,
+                'permisos' => $usuario->permisos
+            ]);
         } catch (\Exception $e) {
-            $this->response->sendError('Error al obtener los usuarios: ' . $e->getMessage(), 500);
+            $this->response->sendError('Error al obtener los permisos: ' . $e->getMessage(), 500);
         }
     }
 
