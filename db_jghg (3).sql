@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3305
--- Tiempo de generación: 23-05-2025 a las 16:47:55
+-- Tiempo de generación: 28-05-2025 a las 21:49:28
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -27,7 +27,9 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_por_usuario` (IN `p_login` VARCHAR(50))   BEGIN
     SELECT 
-        u.id_usuario, 
+        u.id_usuario,
+        u.nom_usuario,
+        u.imagen,
         u.login, 
         u.clave, 
         u.cargo, 
@@ -37,7 +39,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_login_por_usuario` (IN `p_login`
     FROM usuario u
     INNER JOIN usuario_permiso u_p ON u.id_usuario = u_p.id_usuario
     INNER JOIN permiso p ON u_p.id_permiso = p.id_permiso
-    WHERE u.login = p_login;
+    WHERE u.login = p_login AND u_p.estado = '1';
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_permisos_por_usuario` (IN `p_id_usuario` INT)   BEGIN
@@ -48,7 +50,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_permisos_por_usuario` (IN `p_id_
     FROM usuario u
     INNER JOIN usuario_permiso u_p ON u.id_usuario = u_p.id_usuario
     INNER JOIN permiso p ON u_p.id_permiso = p.id_permiso
-    WHERE u_p.id_usuario = p_id_usuario;
+    WHERE u_p.id_usuario = p_id_usuario AND u_p.estado = 1;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuario_buscar_por_id` (IN `p_id` INT)   BEGIN
@@ -310,7 +312,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id_usuario`, `id_persona`, `nom_usuario`, `login`, `clave`, `cargo`, `imagen`, `estado`) VALUES
 (1, 1, 'Admin00', 'admin@jghg.edu.pe', '$2y$10$bJ84ra.xyEZEEMCwMON0G.zxJDH3jYmtLVo2cbqo9dLHD64Bu31Ba', 'admin', '1714091104.png', '1'),
-(2, 2, 'Director', 'director@jghg.edu.pe', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e99', 'docente', '1714091104.png', '1');
+(2, 2, 'Director', 'director@jghg.edu.pe', '$2y$10$bJ84ra.xyEZEEMCwMON0G.zxJDH3jYmtLVo2cbqo9dLHD64Bu31Ba', 'docente', '1714091104.png', '1');
 
 -- --------------------------------------------------------
 
@@ -333,7 +335,7 @@ INSERT INTO `usuario_permiso` (`id_usuario_permiso`, `id_usuario`, `id_permiso`,
 (1, 1, 1, '1'),
 (2, 1, 2, '1'),
 (3, 2, 1, '1'),
-(4, 2, 2, '1');
+(4, 2, 2, '0');
 
 --
 -- Índices para tablas volcadas

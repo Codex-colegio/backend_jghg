@@ -13,8 +13,8 @@ class Login {
         $stmt->execute(['usuario' => $usuario]);
         $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
+        
         if (!$result) return null;
-
         // Tomamos los datos del usuario de la primera fila
         $usuarioData = $result[0];
 

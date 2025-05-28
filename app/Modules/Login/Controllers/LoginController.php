@@ -30,20 +30,43 @@ class LoginController {
 
             unset($usuario_verificado['clave']);
 
+            // $token = JwtHelper::generarToken([
+            //     'id' => $usuario_verificado['id_usuario'],
+            //     'usuario' => $usuario_verificado['login'],
+            //     'cargo' => $usuario_verificado['cargo'],
+            //     'permisos' => $usuario_verificado['permisos'] // ahora es array
+            // ]);
+
             $token = JwtHelper::generarToken([
                 'id' => $usuario_verificado['id_usuario'],
+                'nombre' => $usuario_verificado['nom_usuario'],
+                'imagen' => $usuario_verificado['imagen'],
                 'usuario' => $usuario_verificado['login'],
                 'cargo' => $usuario_verificado['cargo'],
                 'permisos' => $usuario_verificado['permisos'] // ahora es array
             ]);
-
+            
             $this->response->sendJson([
                 'token' => $token,
+                'idusuario' => $usuario_verificado['id_usuario'],
+                'nombre' => $usuario_verificado['nom_usuario'],
+                'imagen' => $usuario_verificado['imagen'],
                 'usuario' => $usuario_verificado['login'],
                 'cargo' => $usuario_verificado['cargo'],
                 'permisos' => $usuario_verificado['permisos'],
                 'estado' => $usuario_verificado['estado']
             ]);
+
+            // $this->response->sendJson([
+            //     'token' => $token,
+            //     'idusuario' => $usuario_verificado['id_usuario'],
+            //     'nombre' => $usuario_verificado['nom_usuario'],
+            //     'imagen' => $usuario_verificado['imagen'],
+            //     'login' => $usuario_verificado['login'],
+            //     'cargo' => $usuario_verificado['cargo'],
+            //     'permisos' => $usuario_verificado['permisos'],
+            //     'estado' => $usuario_verificado['estado']
+            // ]);
         } catch (\Exception $e) {
             $this->response->sendError('Error al autenticar: ' . $e->getMessage(), 500);
         }

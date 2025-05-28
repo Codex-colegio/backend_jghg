@@ -20,7 +20,9 @@ class PermisoController extends BaseAuthController {
 
             $this->response->sendJson([
                 'idusuario' => $usuario->id,
-                'usuario' => $usuario->usuario,
+                'nombre' => $usuario->nombre,
+                'imagen' => $usuario->imagen,
+                'login' => $usuario->usuario,
                 'cargo' => $usuario->cargo,
                 'permisos' => $usuario->permisos
             ]);
