@@ -17,7 +17,7 @@ class LoginControllerTest extends TestCase
         // Mock del cuerpo de la solicitud
         $mockBody = [
             'usuario' => 'admin',
-            'clave' => '123'
+            'clave' => '1234'
         ];
 
         // Usuario simulado en la base de datos
@@ -27,7 +27,10 @@ class LoginControllerTest extends TestCase
             'clave' => password_hash('1234', PASSWORD_DEFAULT),
             'cargo' => 'Administrador',
             'permisos' => ['ver_dashboard'],
-            'estado' => 'activo'
+            'estado' => 'activo',
+            // **Estos dos faltaban** ↓↓↓
+            'nom_usuario'=> 'Juan Pérez',
+            'imagen'     => '/path/to/avatar.png',
         ];
 
         // Mocks de dependencias
